@@ -288,7 +288,7 @@ function removeArtist(arr, index){
   arr.splice(index, 1);
   return arr.length;
 }
-console.log('------------Task-4:----------------');
+console.log('------------Task-5:----------------');
 console.log(removeArtist(artists, 0));
 console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
@@ -327,11 +327,14 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
-}
+const lotsOfArt = (arr) => arr.filter((elem) => {
+  if (elem.paintings > 100) // more than 100 paintings
+    return elem;
+}).map(x => x.name);
 
-
+console.log('------------Task-7:----------------');
+console.log(lotsOfArt(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 
 // 🎨🎨 STRETCH 🎨🎨//
