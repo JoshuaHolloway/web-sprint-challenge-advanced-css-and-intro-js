@@ -272,7 +272,7 @@ const get20s_alt = X => X.filter(x => {
 
 console.log('------------Task-3 (alt):----------------');
 console.log(get20s_alt(artists));
-console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -284,10 +284,13 @@ console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+function removeArtist(arr, index){
+  arr.splice(index, 1);
+  return arr.length;
 }
-   
+console.log('------------Task-4:----------------');
+console.log(removeArtist(artists, 0));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use addArtist to do the following: 
