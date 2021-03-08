@@ -208,17 +208,24 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
+console.log('------------Task-1.1:----------------');
+console.log(`artists[0].name = ${artists[0].name}`);
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
-
-//(2) Bio of the third artist (2nd index) in the array 
-
-
+//(2) Bio of the third artist (2nd index) in the array
+console.log('------------Task-1.2:----------------'); 
+console.log(`artists[1].bio = ${artists[1].bio}`);
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
-
+console.log('------------Task-2:----------------');
+const artist = artists.find(artist => artist.name.toLowerCase() === 'vincent van dough');
+artist.name = 'Vincent Van Gogh';
+console.log(artist);
+console.log('-----------------------------------');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
  Use getArtistByIndex to do the following:
@@ -227,12 +234,8 @@ There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is current
  3. Return a string in the format `the artist at index {id} is {name}`
  
  Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
-
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
-}  
-
-
+const f = (x, i) => `the artist at index ${i} is ${x[i].name}`;
+const getArtistByIndex = ($, _) => f($, _);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use get20s to do the following: 
