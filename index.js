@@ -245,10 +245,34 @@ Use get20s to do the following:
 Example born in 1901 and died in 1959 - included -- born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
-  /*Your Code Here*/
-}
+const get20s = (arr) => {
+    const new_arr = [];
+    for(let i = 0; i < arr.length; ++i) {
+      const years = arr[i].years.split(' - ');
+      const years_lo = Number(years[0]);
+      const years_hi = Number(years[1]);
 
+      // Start and end in the Gregorian calendar (1900,2000]
+      // According to the strict construction of the Gregorian calendar, the 1st century AD began with 1 AD and ended with 100 AD, with the same pattern continuing onward. In this model, the n-th century started/will start on the year (100 × n) − 99 and ends in 100 × n.
+      // https://en.wikipedia.org/wiki/Century#:~:text=Start%20and%20end%20in%20the%20Gregorian%20calendar,-Although%20a%20century&text=According%20to%20the%20strict%20construction,ends%20in%20100%20%C3%97%20n.
+      if (1900 < years_lo && years_hi <= 2000)
+        new_arr.push(arr[i].name);
+    }
+    return new_arr;
+}
+console.log('------------Task-3:----------------');
+console.log(get20s(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+
+const get20s_alt = X => X.filter(x => {
+  const [lo, hi] = x.years.split(' - ').map(y => Number(y));
+  if (1900 < lo && hi <= 2000)
+    return x.name;
+}).map(z => z.name);
+
+console.log('------------Task-3 (alt):----------------');
+console.log(get20s_alt(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
