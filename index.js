@@ -208,17 +208,24 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
+console.log('------------Task-1.1:----------------');
+console.log(`artists[0].name = ${artists[0].name}`);
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
-
-//(2) Bio of the third artist (2nd index) in the array 
-
-
+//(2) Bio of the third artist (2nd index) in the array
+console.log('------------Task-1.2:----------------'); 
+console.log(`artists[1].bio = ${artists[1].bio}`);
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
-
+console.log('------------Task-2:----------------');
+const artist = artists.find(artist => artist.name.toLowerCase() === 'vincent van dough');
+artist.name = 'Vincent Van Gogh';
+console.log(artist);
+console.log('-----------------------------------');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
  Use getArtistByIndex to do the following:
@@ -227,12 +234,8 @@ There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is current
  3. Return a string in the format `the artist at index {id} is {name}`
  
  Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
-
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
-}  
-
-
+const f = (x, i) => `the artist at index ${i} is ${x[i].name}`;
+const getArtistByIndex = ($, _) => f($, _);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use get20s to do the following: 
@@ -242,10 +245,34 @@ Use get20s to do the following:
 Example born in 1901 and died in 1959 - included -- born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
-  /*Your Code Here*/
-}
+const get20s = (arr) => {
+    const new_arr = [];
+    for(let i = 0; i < arr.length; ++i) {
+      const years = arr[i].years.split(' - ');
+      const years_lo = Number(years[0]);
+      const years_hi = Number(years[1]);
 
+      // Start and end in the Gregorian calendar (1900,2000]
+      // According to the strict construction of the Gregorian calendar, the 1st century AD began with 1 AD and ended with 100 AD, with the same pattern continuing onward. In this model, the n-th century started/will start on the year (100 × n) − 99 and ends in 100 × n.
+      // https://en.wikipedia.org/wiki/Century#:~:text=Start%20and%20end%20in%20the%20Gregorian%20calendar,-Although%20a%20century&text=According%20to%20the%20strict%20construction,ends%20in%20100%20%C3%97%20n.
+      if (1900 < years_lo && years_hi <= 2000)
+        new_arr.push(arr[i].name);
+    }
+    return new_arr;
+}
+console.log('------------Task-3:----------------');
+console.log(get20s(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+
+const get20s_alt = X => X.filter(x => {
+  const [lo, hi] = x.years.split(' - ').map(y => Number(y));
+  if (1900 < lo && hi <= 2000)
+    return x.name;
+}).map(z => z.name);
+
+console.log('------------Task-3 (alt):----------------');
+console.log(get20s_alt(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -257,10 +284,13 @@ function get20s(/*Your Code Here*/){
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+function removeArtist(arr, index){
+  arr.splice(index, 1);
+  return arr.length;
 }
-   
+console.log('------------Task-5:----------------');
+console.log(removeArtist(artists, 0));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use addArtist to do the following: 
@@ -278,11 +308,17 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
-
-  
+const addArtist = (arr, obj={ 
+  id: arr.length,
+  name: 'josh', 
+  years: '1983',
+  genre: 'Web Design', 
+  nationality: 'US',
+  bio: 'Add 1-2 sentences (or use lorem ipsum)'
+}) => {
+  arr.push(obj);
+  return arr;
+}
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use lotsOfArt to do the following: 
@@ -291,11 +327,14 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
-}
+const lotsOfArt = (arr) => arr.filter((elem) => {
+  if (elem.paintings > 100) // more than 100 paintings
+    return elem;
+}).map(x => x.name);
 
-
+console.log('------------Task-7:----------------');
+console.log(lotsOfArt(artists));
+console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
 
 // 🎨🎨 STRETCH 🎨🎨//
@@ -330,15 +369,32 @@ function getHTML(/* Code here */){
 /* 💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪
 Create a function called `randomize` that takes a data array as an argument and returns a the same array in a randomized order. */
 
-function randomize(/* Code here */){
+function randomize(arr){
 
-    /* Code here */
-
+  const rand_nums = [];
+  const new_arr = [];
+  for (let i = 0; new_arr.length < arr.length; i++) {
+    const rand_num = Math.random();
+    const rand_index = Math.floor(rand_num * arr.length);
+    
+    // Ensure rand_index has not been chosen already
+    if (!rand_nums.includes(rand_index)) {
+      rand_nums.push(rand_index);
+      new_arr.push(arr[rand_index]);
+    }
   }
+  return new_arr;    
+}
+console.log('--------Stretch-Task-2:------------');
+const test_arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(randomize(test_arr));
+console.log('-----------------------------------');
 
 
  /* 💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪
  Use advanced array methods (.map, .reduce, .filer) to refactor your MVP code (create an array of all artists born in the 1900s with .filter, for example) */
+
+ // I think I already did this in my original solutions above.
 
  
  
@@ -357,3 +413,5 @@ export default{
   addArtist,
   lotsOfArt
 }
+
+const myName = "josh"
